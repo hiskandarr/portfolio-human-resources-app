@@ -33,9 +33,14 @@
                     </h5>
                 </div>
                 <div class="card-body">
+
                     <div class="d-flex">
-                        <a href="" class="btn btn-primary mb-3 ms-auto">New Task</a>
+                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">New Task</a>
                     </div>
+
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
 
                     <table class="table table-striped" id="table1">
                         <thead>
