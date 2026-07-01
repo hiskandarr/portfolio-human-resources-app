@@ -57,7 +57,7 @@
                                 <tr>
                                     <td>{{ $task->title }}</td>
                                     <td>{{ $task->employee->fullname }}</td>
-                                    <td>{{ $task->due_date }}</td>
+                                    <td>{{ date('d F Y', strtotime($task->due_date)) }}</td>
                                     <td>
                                         @if ($task->status == 'pending')
                                             <span class="text-warning">{{ $task->status }}</span>
@@ -76,7 +76,7 @@
                                             <a href="" class="btn btn-warning btn-sm">Mark as Pending</a>
                                         @endif
 
-                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Edit</a>
                                         <a href="" class="btn btn-danger btn-sm">Delete</a>
                                     </td>
                                 </tr>
