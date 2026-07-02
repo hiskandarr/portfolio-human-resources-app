@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('/tasks', TaskController::class);
 Route::get('/tasks/{task}/done', [TaskController::class, 'done'])->name('tasks.done');
 Route::get('/tasks/{task}/pending', [TaskController::class, 'pending'])->name('tasks.pending');
+
+// Handle email routes
+Route::resource('/employees', EmployeeController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -87,8 +87,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('employees.*') ? 'active' : '' }}">
-                            {{-- <a href="{{ route('employees.index') }}" class='sidebar-link'> --}}
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                            <a href="{{ route('employees.index') }}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>Employees</span>
                             </a>
