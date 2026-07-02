@@ -57,23 +57,26 @@
                                 <tr>
                                     <td>{{ $task->title }}</td>
                                     <td>{{ $task->employee->fullname }}</td>
-                                    <td>{{ date('d F Y', strtotime($task->due_date)) }}</td>
+                                    <td>{{ Carbon\Carbon::parse($task->due_date)->format('d F Y') }}</td>
                                     <td>
                                         @if ($task->status == 'pending')
-                                            <span class="text-warning">{{ $task->status }}</span>
+                                            <span class="text-warning">{{ ucfirst($task->status) }}</span>
                                         @elseif ($task->status == 'done')
-                                            <span class="text-success">{{ $task->status }}</span>
+                                            <span class="text-success">{{ ucfirst($task->status) }}</span>
                                         @else
-                                            <span class="text-info">{{ $task->status }}</span>
+                                            <span class="text-info">{{ ucfirst($task->status) }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-info btn-sm">View</a>
+                                        <a href="{{ route('tasks.show', $task) }}" class="btn btn-info btn-sm">View</a>
 
                                         @if ($task->status == 'pending')
-                                            <a href="" class="btn btn-success btn-sm">Mark as Done</a>
+                                            <a href="{{ route('tasks.done', $task) }}" class="btn btn-success btn-sm">Mark
+                                                as Done</a>
                                         @else
-                                            <a href="" class="btn btn-warning btn-sm">Mark as Pending</a>
+                                            <a href="{{ route('tasks.pending', $task) }}"
+                                                class="btn btn-warning btn-sm">Mark
+                                                as Pending</a>
                                         @endif
 
                                         <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Edit</a>

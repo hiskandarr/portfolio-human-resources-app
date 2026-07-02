@@ -15,7 +15,10 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+// Handle task routes
 Route::resource('/tasks', TaskController::class);
+Route::get('/tasks/{task}/done', [TaskController::class, 'done'])->name('tasks.done');
+Route::get('/tasks/{task}/pending', [TaskController::class, 'pending'])->name('tasks.pending');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

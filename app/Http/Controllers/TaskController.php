@@ -50,9 +50,9 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        //
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -92,5 +92,21 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
+    }
+
+    public function done(Task $task)
+    {
+        $task->status = 'done';
+        $task->save();
+
+        return redirect()->route('tasks.index')->with('success', 'Task marked as done.');
+    }
+
+    public function pending(Task $task)
+    {
+        $task->status = 'pending';
+        $task->save();
+
+        return redirect()->route('tasks.index')->with('success', 'Task marked as pending.');
     }
 }
