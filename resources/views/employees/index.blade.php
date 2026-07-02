@@ -68,7 +68,7 @@
                                             <span class="text-warning">{{ ucfirst($employee->status) }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $employee->salary }}</td>
+                                    <td>{{ number_format($employee->salary) }}</td>
 
                                     <td>
                                         <a href="{{ route('employees.show', $employee) }}"
