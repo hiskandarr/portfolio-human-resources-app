@@ -77,7 +77,12 @@
                                         @endif
 
                                         <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                        <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
