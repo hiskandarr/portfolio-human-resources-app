@@ -19,7 +19,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
                             <li class="breadcrumb-item" aria-current="page">Employees</li>
-                            <li class="breadcrumb-item active" aria-current="page">New</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Create.
+                        Edit.
                     </h5>
                 </div>
                 <div class="card-body">
@@ -44,13 +44,14 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('employees.store') }}" method="POST">
+                    <form action="{{ route('employees.update', $employee) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="mb-3">
                             <label for="" class="form-label">Fullname</label>
-                            <input type="text" class="form-control" name="fullname" value="{{ old('fullname') }}"
-                                required>
+                            <input type="text" class="form-control" name="fullname"
+                                value="{{ old('fullname', $employee->fullname) }}" required>
                             @error('fullname')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -58,7 +59,8 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" value="{{ old('email') }}" required>
+                            <input type="text" class="form-control" name="email"
+                                value="{{ old('email', $employee->email) }}" required>
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -66,8 +68,8 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}"
-                                required>
+                            <input type="text" class="form-control" name="phone_number"
+                                value="{{ old('phone_number', $employee->phone_number) }}" required>
                             @error('phone_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -75,7 +77,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Address</label>
-                            <textarea name="address" class="form-control @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
+                            <textarea name="address" class="form-control @error('address') is-invalid @enderror">{{ old('address', $employee->address) }}</textarea>
                             @error('address')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -84,7 +86,7 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Birth Date</label>
                             <input type="date" class="form-control date @error('birth_date') is-invalid @enderror"
-                                name="birth_date" value="{{ old('birth_date') }}" required>
+                                name="birth_date" value="{{ old('birth_date', $employee->birth_date) }}" required>
                             @error('birth_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -93,7 +95,7 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Hire Date</label>
                             <input type="date" class="form-control date @error('hire_date') is-invalid @enderror"
-                                name="hire_date" value="{{ old('hire_date') }}" required>
+                                name="hire_date" value="{{ old('hire_date', $employee->hire_date) }}" required>
                             @error('hire_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -105,7 +107,7 @@
                                 <option value="">Select an Department</option>
                                 @foreach ($departments as $department)
                                     <option value="{{ $department->id }}"
-                                        {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                                        {{ old('department_id', $employee->department_id) == $department->id ? 'selected' : '' }}>
                                         {{ $department->name }}
                                     </option>
                                 @endforeach
@@ -121,7 +123,7 @@
                                 <option value="">Select an Role</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"
-                                        {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                                        {{ old('role_id', $employee->role_id) == $role->id ? 'selected' : '' }}>
                                         {{ $role->title }}
                                     </option>
                                 @endforeach
@@ -134,9 +136,11 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Status</label>
                             <select name="status" class="form-control @error('status') is-invalid @enderror">
-                                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive
+                                <option value="inactive"
+                                    {{ old('status', $employee->status) == 'inactive' ? 'selected' : '' }}>Inactive
                                 </option>
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="active"
+                                    {{ old('status', $employee->status) == 'active' ? 'selected' : '' }}>Active</option>
                             </select>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -145,14 +149,14 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Salary</label>
-                            <input type="number" class="form-control" name="salary" value="{{ old('salary') }}"
-                                required>
+                            <input type="number" class="form-control" name="salary"
+                                value="{{ old('salary', $employee->salary) }}" required>
                             @error('salary')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create Employee</button>
+                        <button type="submit" class="btn btn-primary">Update Employee</button>
                         <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back to List</a>
                     </form>
                 </div>

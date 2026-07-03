@@ -34,13 +34,18 @@
                 </div>
                 <div class="card-body">
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
                     <form action="{{ route('tasks.update', $task) }}" method="POST">
                         @csrf
-
                         @method('PUT')
 
                         <div class="mb-3">
