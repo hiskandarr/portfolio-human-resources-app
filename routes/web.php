@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
@@ -16,13 +17,16 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Handle task routes
+// Handle tasks routes
 Route::resource('/tasks', TaskController::class);
 Route::get('/tasks/{task}/done', [TaskController::class, 'done'])->name('tasks.done');
 Route::get('/tasks/{task}/pending', [TaskController::class, 'pending'])->name('tasks.pending');
 
-// Handle email routes
+// Handle employees routes
 Route::resource('/employees', EmployeeController::class);
+
+// Handle departments routes
+Route::resource('/departments', DepartmentController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
