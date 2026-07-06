@@ -99,8 +99,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('roles.*') ? 'active' : '' }}">
-                            {{-- <a href="{{ route('roles.index') }}" class='sidebar-link'> --}}
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                            <a href="{{ route('roles.index') }}" class='sidebar-link'>
                                 <i class="bi bi-tag-fill"></i>
                                 <span>Roles</span>
                             </a>

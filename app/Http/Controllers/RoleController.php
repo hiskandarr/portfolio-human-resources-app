@@ -22,7 +22,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -30,7 +30,14 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        Role::create($request->all());
+
+        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
     /**
