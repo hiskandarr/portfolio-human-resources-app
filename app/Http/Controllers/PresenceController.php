@@ -59,7 +59,9 @@ class PresenceController extends Controller
      */
     public function edit(Presence $presence)
     {
-        //
+        $employees = Employee::all();
+
+        return view('presences.edit', compact('presence', 'employees'));
     }
 
     /**
@@ -67,7 +69,17 @@ class PresenceController extends Controller
      */
     public function update(Request $request, Presence $presence)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'check_in' => 'required|date',
+            'check_out' => 'nullable|date|after:check_in',
+            'date' => 'required|date',
+            'status' => 'required|string|max:255',
+        ]);
+
+        $presence->update($request->all());
+
+        return redirect()->route('presences.index')->with('success', 'Presence updated successfully.');
     }
 
     /**
