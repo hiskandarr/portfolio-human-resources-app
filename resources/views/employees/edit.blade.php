@@ -85,7 +85,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Birth Date</label>
-                            <input type="date" class="form-control date @error('birth_date') is-invalid @enderror"
+                            <input type="text" class="form-control date @error('birth_date') is-invalid @enderror"
                                 name="birth_date" value="{{ old('birth_date', $employee->birth_date) }}" required>
                             @error('birth_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -94,7 +94,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Hire Date</label>
-                            <input type="date" class="form-control date @error('hire_date') is-invalid @enderror"
+                            <input type="text" class="form-control date @error('hire_date') is-invalid @enderror"
                                 name="hire_date" value="{{ old('hire_date', $employee->hire_date) }}" required>
                             @error('hire_date')
                                 <div class="invalid-feedback">{{ $message }}</div>

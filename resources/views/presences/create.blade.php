@@ -65,7 +65,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Check In</label>
-                            <input type="date" class="form-control datetime @error('check_in') is-invalid @enderror"
+                            <input type="text" class="form-control datetime @error('check_in') is-invalid @enderror"
                                 name="check_in" value="{{ old('check_in') }}" required>
                             @error('check_in')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -74,7 +74,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Check Out</label>
-                            <input type="date" class="form-control datetime @error('check_out') is-invalid @enderror"
+                            <input type="text" class="form-control datetime @error('check_out') is-invalid @enderror"
                                 name="check_out" value="{{ old('check_out') }}" required>
                             @error('check_out')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -83,7 +83,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Date</label>
-                            <input type="date" class="form-control date @error('date') is-invalid @enderror"
+                            <input type="text" class="form-control date @error('date') is-invalid @enderror"
                                 name="date" value="{{ old('date') }}" required>
                             @error('date')
                                 <div class="invalid-feedback">{{ $message }}</div>
