@@ -105,8 +105,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('presences.*') ? 'active' : '' }}">
-                            {{-- <a href="{{ route('presences.index') }}" class='sidebar-link'> --}}
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                            <a href="{{ route('presences.index') }}" class='sidebar-link'>
                                 <i class="bi bi-table"></i>
                                 <span>Presences</span>
                             </a>
@@ -171,6 +170,11 @@
     <script>
         let date = flatpickr(".date", {
             dateFormat: "Y-m-d"
+        });
+
+        let datetime = flatpickr(".datetime", {
+            dateFormat: "Y-m-d H:i:s",
+            enableTime: true
         });
     </script>
 </body>
