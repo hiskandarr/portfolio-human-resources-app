@@ -59,9 +59,9 @@
 
                                     <td>
                                         @if ($department->status == 'inactive')
-                                            <span class="text-warning">{{ ucfirst($department->status) }}</span>
+                                            <span class="badge bg-warning">{{ ucfirst($department->status) }}</span>
                                         @else
-                                            <span class="text-success">{{ ucfirst($department->status) }}</span>
+                                            <span class="badge bg-success">{{ ucfirst($department->status) }}</span>
                                         @endif
                                     </td>
 

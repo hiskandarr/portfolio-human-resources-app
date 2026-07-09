@@ -63,9 +63,9 @@
                                     <td>{{ $employee->role->title }}</td>
                                     <td>
                                         @if ($employee->status == 'active')
-                                            <span class="text-success">{{ ucfirst($employee->status) }}</span>
+                                            <span class="badge bg-success">{{ ucfirst($employee->status) }}</span>
                                         @else
-                                            <span class="text-warning">{{ ucfirst($employee->status) }}</span>
+                                            <span class="badge bg-warning">{{ ucfirst($employee->status) }}</span>
                                         @endif
                                     </td>
                                     <td>{{ number_format($employee->salary) }}</td>

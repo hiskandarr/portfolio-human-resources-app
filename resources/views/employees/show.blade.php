@@ -67,9 +67,9 @@
                         <label for=""><b>Status</b></label>
                         <p>
                             @if ($employee->status == 'active')
-                                <span class="text-success">{{ ucfirst($employee->status) }}</span>
+                                <span class="badge bg-success">{{ ucfirst($employee->status) }}</span>
                             @else
-                                <span class="text-danger">{{ ucfirst($employee->status) }}</span>
+                                <span class="badge bg-danger">{{ ucfirst($employee->status) }}</span>
                             @endif
                         </p>
                     </div>

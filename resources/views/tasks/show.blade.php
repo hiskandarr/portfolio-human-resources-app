@@ -52,11 +52,11 @@
                         <label for=""><b>Status</b></label>
                         <p>
                             @if ($task->status == 'pending')
-                                <span class="text-warning">{{ ucfirst($task->status) }}</span>
+                                <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
                             @elseif ($task->status == 'done')
-                                <span class="text-success">{{ ucfirst($task->status) }}</span>
+                                <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
                             @else
-                                <span class="text-info">{{ ucfirst($task->status) }}</span>
+                                <span class="badge bg-info">{{ ucfirst($task->status) }}</span>
                             @endif
                         </p>
                     </div>
