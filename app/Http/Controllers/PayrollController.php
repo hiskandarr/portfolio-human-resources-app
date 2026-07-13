@@ -63,7 +63,9 @@ class PayrollController extends Controller
      */
     public function edit(Payroll $payroll)
     {
-        //
+        $employees = Employee::all();
+
+        return view('payrolls.edit', compact('payroll', 'employees'));
     }
 
     /**
@@ -71,7 +73,21 @@ class PayrollController extends Controller
      */
     public function update(Request $request, Payroll $payroll)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'salary' => 'required|numeric',
+            'bonuses' => 'required|numeric',
+            'deductions' => 'required|numeric',
+            'pay_date' => 'required|date',
+        ]);
+
+        $netSalary = $request->input('salary') + $request->input('bonuses') - $request->input('deductions');
+
+        $request->merge(['net_salary' => $netSalary]);
+
+        $payroll->update($request->all());
+
+        return redirect()->route('payrolls.index')->with('success', 'Payroll updated successfully.');
     }
 
     /**
