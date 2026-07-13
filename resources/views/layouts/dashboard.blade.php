@@ -34,7 +34,7 @@
                             <a href="index.html"><img src="{{ asset('mazer/dist/assets/compiled/svg/logo.svg') }}"
                                     alt="Logo" srcset=""></a>
                         </div>
-                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                        <div class="gap-2 mt-2 theme-toggle d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -52,7 +52,7 @@
                                 </g>
                             </svg>
                             <div class="form-check form-switch fs-6">
-                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
+                                <input class="form-check-input me-0" type="checkbox" id="toggle-dark"
                                     style="cursor: pointer">
                                 <label class="form-check-label"></label>
                             </div>
@@ -64,7 +64,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="sidebar-toggler  x">
+                        <div class="sidebar-toggler x">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
                                     class="bi bi-x bi-middle"></i></a>
                         </div>
@@ -110,9 +110,9 @@
                                 <span>Presences</span>
                             </a>
                         </li>
+
                         <li class="sidebar-item {{ request()->routeIs('payrolls.*') ? 'active' : '' }}">
-                            {{-- <a href="{{ route('payrolls.index') }}" class='sidebar-link'> --}}
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                            <a href="{{ route('payrolls.index') }}" class='sidebar-link'>
                                 <i class="bi bi-currency-dollar"></i>
                                 <span>Payrolls</span>
                             </a>
@@ -138,7 +138,7 @@
             @yield('content')
 
             <footer>
-                <div class="footer clearfix mb-0 text-muted">
+                <div class="clearfix mb-0 footer text-muted">
                     <div class="float-start">
                         <p>2023 &copy; Mazer</p>
                     </div>
