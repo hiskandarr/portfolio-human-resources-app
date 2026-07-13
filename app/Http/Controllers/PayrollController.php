@@ -95,6 +95,8 @@ class PayrollController extends Controller
      */
     public function destroy(Payroll $payroll)
     {
-        //
+        $payroll->delete($payroll->id);
+
+        return redirect()->route('payrolls.index')->with('success', 'Payroll deleted successfully.');
     }
 }
