@@ -89,7 +89,9 @@ class LeaveRequestController extends Controller
      */
     public function destroy(LeaveRequest $leaveRequest)
     {
-        //
+        $leaveRequest->delete();
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request deleted successfully.');
     }
 
     public function confirm(LeaveRequest $leaveRequest)
