@@ -43,6 +43,8 @@ Route::resource('/payrolls', PayrollController::class);
 
 // Handle leaves requests routes
 Route::resource('/leave-requests', LeaveRequestController::class);
+Route::get('/leave-requests/{leaveRequest}/confirm', [LeaveRequestController::class, 'confirm'])->name('leave-requests.confirm');
+Route::get('/leave-requests/{leaveRequest}/reject', [LeaveRequestController::class, 'reject'])->name('leave-requests.reject');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

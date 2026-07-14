@@ -91,4 +91,18 @@ class LeaveRequestController extends Controller
     {
         //
     }
+
+    public function confirm(LeaveRequest $leaveRequest)
+    {
+        $leaveRequest->update(['status' => 'confirm']);
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request confirmed successfully.');
+    }
+
+    public function reject(LeaveRequest $leaveRequest)
+    {
+        $leaveRequest->update(['status' => 'reject']);
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request rejected successfully.');
+    }
 }

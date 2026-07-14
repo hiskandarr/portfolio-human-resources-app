@@ -62,8 +62,10 @@
                                     <td>{{ $leaveRequest->start_date }}</td>
                                     <td>{{ $leaveRequest->end_date }}</td>
                                     <td>
-                                        @if ($leaveRequest->status == 'approved')
+                                        @if ($leaveRequest->status == 'confirm')
                                             <span class="badge bg-success">{{ ucfirst($leaveRequest->status) }}</span>
+                                        @elseif ($leaveRequest->status == 'reject')
+                                            <span class="badge bg-danger">{{ ucfirst($leaveRequest->status) }}</span>
                                         @else
                                             <span class="badge bg-warning">{{ ucfirst($leaveRequest->status) }}</span>
                                         @endif
@@ -71,8 +73,22 @@
                                     </td>
 
                                     <td>
+                                        @if ($leaveRequest->status == 'confirm')
+                                            <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
+                                                class="btn btn-secondary btn-sm">Reject</a>
+                                        @elseif ($leaveRequest->status == 'reject')
+                                            <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
+                                                class="btn btn-success btn-sm">Confirm</a>
+                                        @else
+                                            <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
+                                                class="btn btn-success btn-sm">Confirm</a>
+                                            <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
+                                                class="btn btn-secondary btn-sm">Reject</a>
+                                        @endif
+
                                         <a href="{{ route('leave-requests.edit', $leaveRequest) }}"
                                             class="btn btn-warning btn-sm">Edit</a>
+
                                         <form action="{{ route('leave-requests.destroy', $leaveRequest) }}" method="POST"
                                             class="d-inline">
                                             @csrf
