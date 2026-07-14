@@ -60,7 +60,9 @@ class LeaveRequestController extends Controller
      */
     public function edit(LeaveRequest $leaveRequest)
     {
-        //
+        $employees = Employee::all();
+
+        return view('leave-requests.edit', compact('leaveRequest', 'employees'));
     }
 
     /**
@@ -68,7 +70,18 @@ class LeaveRequestController extends Controller
      */
     public function update(Request $request, LeaveRequest $leaveRequest)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'leave_type' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $request->merge(['status' => 'pending']); // Set default status to pending
+
+        $leaveRequest->update($request->all());
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request updated successfully.');
     }
 
     /**
