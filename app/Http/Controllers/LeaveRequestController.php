@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,9 @@ class LeaveRequestController extends Controller
      */
     public function create()
     {
-        //
+        $employees = Employee::all();
+
+        return view('leave-requests.create', compact('employees'));
     }
 
     /**
@@ -30,7 +33,18 @@ class LeaveRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'leave_type' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $request->merge(['status' => 'pending']); // Set default status to pending
+
+        LeaveRequest::create($request->all());
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request created successfully.');
     }
 
     /**
