@@ -55,7 +55,7 @@ class PayrollController extends Controller
      */
     public function show(Payroll $payroll)
     {
-        //
+        return view('payrolls.show', compact('payroll'));
     }
 
     /**

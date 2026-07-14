@@ -65,6 +65,8 @@
                                     <td>{{ $payroll->pay_date }}</td>
 
                                     <td>
+                                        <a href="{{ route('payrolls.show', $payroll) }}" class="btn btn-info btn-sm">Salary
+                                            Slip</a>
                                         <a href="{{ route('payrolls.edit', $payroll) }}"
                                             class="btn btn-warning btn-sm">Edit</a>
                                         <form action="{{ route('payrolls.destroy', $payroll) }}" method="POST"
