@@ -118,8 +118,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('leave-requests.*') ? 'active' : '' }}">
-                            {{-- <a href="{{ route('leave-requests.index') }}" class='sidebar-link'> --}}
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                            <a href="{{ route('leave-requests.index') }}" class='sidebar-link'>
                                 <i class="bi bi-shift-fill"></i>
                                 <span>Leave Requests</span>
                             </a>

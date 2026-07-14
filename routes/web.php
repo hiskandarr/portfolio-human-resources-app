@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\ProfileController;
@@ -39,6 +40,9 @@ Route::resource('/presences', PresenceController::class);
 
 // Handle payrolls routes
 Route::resource('/payrolls', PayrollController::class);
+
+// Handle leaves requests routes
+Route::resource('/leave-requests', LeaveRequestController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
