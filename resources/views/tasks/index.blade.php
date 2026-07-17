@@ -10,11 +10,11 @@
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
+                <div class="order-last col-12 col-md-6 order-md-1">
                     <h3>Tasks</h3>
                     <p class="text-subtitle text-muted">Handle employee tasks</p>
                 </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
+                <div class="order-first col-12 col-md-6 order-md-2">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
@@ -35,7 +35,10 @@
                 <div class="card-body">
 
                     <div class="d-flex">
-                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">New Task</a>
+                        @if (session('role') == 'HR')
+                            <a href="{{ route('tasks.create') }}" class="mb-3 btn btn-primary ms-auto">New Task</a>
+                        @endif
+
                     </div>
 
                     @if (session('success'))
@@ -79,13 +82,17 @@
                                                 as Pending</a>
                                         @endif
 
-                                        <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
-                                        </form>
+                                        @if (session('role') == 'HR')
+                                            <a href="{{ route('tasks.edit', $task) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
