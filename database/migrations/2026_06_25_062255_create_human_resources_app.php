@@ -88,7 +88,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees');
 
             $table->date('check_in');
-            $table->date('check_out');
+            $table->date('check_out')->nullable();
             $table->date('date');
             $table->string('status');
 
