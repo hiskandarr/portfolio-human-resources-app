@@ -50,7 +50,9 @@
                                 <th>Check Out</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                <th>Option</th>
+                                @if (session('role') == 'HR')
+                                    <th>Option</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -70,15 +72,18 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('presences.edit', $presence) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('presences.destroy', $presence) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this roles?')">Delete</button>
-                                        </form>
+                                        @if (session('role') == 'HR')
+                                            <a href="{{ route('presences.edit', $presence) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('presences.destroy', $presence) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this roles?')">Delete</button>
+                                            </form>
+                                        @endif
+
                                     </td>
                                 </tr>
                             @endforeach

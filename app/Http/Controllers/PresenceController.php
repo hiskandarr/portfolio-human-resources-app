@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Presence;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PresenceController extends Controller
@@ -13,7 +14,11 @@ class PresenceController extends Controller
      */
     public function index()
     {
-        $presences = Presence::all();
+        if (session('role') == 'HR') {
+            $presences = Presence::with('employee')->get();
+        } else {
+            $presences = Presence::where('employee_id', session('employee_id'))->get();
+        }
 
         return view('presences.index', compact('presences'));
     }
@@ -33,15 +38,27 @@ class PresenceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'check_in' => 'required|date',
-            'check_out' => 'nullable|date|after:check_in',
-            'date' => 'required|date',
-            'status' => 'required|string|max:255',
-        ]);
+        if (session('role') == 'HR') {
+            $request->validate([
+                'employee_id' => 'required|exists:employees,id',
+                'check_in' => 'required|date',
+                'check_out' => 'nullable|date|after:check_in',
+                'date' => 'required|date',
+                'status' => 'required|string|max:255',
+            ]);
 
-        Presence::create($request->all());
+            Presence::create($request->all());
+        } else {
+            Presence::create([
+                'employee_id' => session('employee_id'),
+                'check_in' => Carbon::now()->format('Y-m-d H:i:s'),
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'date' => Carbon::now()->format('Y-m-d'),
+                'status' => 'present',
+
+            ]);
+        }
 
         return redirect()->route('presences.index')->with('success', 'Presence recorded successfully.');
     }
