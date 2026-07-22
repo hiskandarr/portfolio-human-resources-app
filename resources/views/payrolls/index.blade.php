@@ -35,7 +35,9 @@
                 <div class="card-body">
 
                     <div class="d-flex">
-                        <a href="{{ route('payrolls.create') }}" class="mb-3 btn btn-primary ms-auto">New Payroll</a>
+                        @if (session('role') == 'HR')
+                            <a href="{{ route('payrolls.create') }}" class="mb-3 btn btn-primary ms-auto">New Payroll</a>
+                        @endif
                     </div>
 
                     @if (session('success'))
@@ -67,15 +69,17 @@
                                     <td>
                                         <a href="{{ route('payrolls.show', $payroll) }}" class="btn btn-info btn-sm">Salary
                                             Slip</a>
-                                        <a href="{{ route('payrolls.edit', $payroll) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('payrolls.destroy', $payroll) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this payroll?')">Delete</button>
-                                        </form>
+                                        @if (session('role') == 'HR')
+                                            <a href="{{ route('payrolls.edit', $payroll) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('payrolls.destroy', $payroll) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this payroll?')">Delete</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
