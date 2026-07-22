@@ -107,36 +107,37 @@
                                     <tr>
                                         <th>Employee</th>
                                         <th>Detail</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="col-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar avatar-md">
-                                                    <img src="{{ asset('mazer/dist/assets/compiled/jpg/5.jpg') }}">
+                                    @foreach ($tasks as $task)
+                                        <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-md">
+                                                        <img
+                                                            src="https://ui-avatars.com/api/?name={{ $task->employee->fullname }}&background=random">
+                                                    </div>
+                                                    <p class="font-bold ms-3 mb-0">{{ $task->employee->fullname }}</p>
                                                 </div>
-                                                <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                            </div>
-                                        </td>
-                                        <td class="col-auto">
-                                            <p class=" mb-0">Congratulations on your graduation!</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar avatar-md">
-                                                    <img src="{{ asset('mazer/dist/assets/compiled/jpg/2.jpg') }}">
-                                                </div>
-                                                <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                            </div>
-                                        </td>
-                                        <td class="col-auto">
-                                            <p class=" mb-0">Wow amazing design! Can you make another
-                                                tutorial for this design?</p>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0">{{ $task->title }}</p>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0">
+                                                    @if ($task->status == 'pending')
+                                                        <span class="badge bg-warning">{{ ucfirst($task->status) }}</span>
+                                                    @elseif ($task->status == 'done')
+                                                        <span class="badge bg-success">{{ ucfirst($task->status) }}</span>
+                                                    @else
+                                                        <span class="badge bg-info">{{ ucfirst($task->status) }}</span>
+                                                    @endif
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
