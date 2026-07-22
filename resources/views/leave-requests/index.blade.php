@@ -51,7 +51,9 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
-                                <th>Option</th>
+                                @if (session('role') == 'HR')
+                                    <th>Option</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -73,29 +75,31 @@
                                     </td>
 
                                     <td>
-                                        @if ($leaveRequest->status == 'confirm')
-                                            <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
-                                                class="btn btn-secondary btn-sm">Reject</a>
-                                        @elseif ($leaveRequest->status == 'reject')
-                                            <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
-                                                class="btn btn-success btn-sm">Confirm</a>
-                                        @else
-                                            <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
-                                                class="btn btn-success btn-sm">Confirm</a>
-                                            <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
-                                                class="btn btn-secondary btn-sm">Reject</a>
+                                        @if (session('role') == 'HR')
+                                            @if ($leaveRequest->status == 'confirm')
+                                                <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
+                                                    class="btn btn-secondary btn-sm">Reject</a>
+                                            @elseif ($leaveRequest->status == 'reject')
+                                                <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
+                                                    class="btn btn-success btn-sm">Confirm</a>
+                                            @else
+                                                <a href="{{ route('leave-requests.confirm', $leaveRequest) }}"
+                                                    class="btn btn-success btn-sm">Confirm</a>
+                                                <a href="{{ route('leave-requests.reject', $leaveRequest) }}"
+                                                    class="btn btn-secondary btn-sm">Reject</a>
+                                            @endif
+
+                                            <a href="{{ route('leave-requests.edit', $leaveRequest) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+
+                                            <form action="{{ route('leave-requests.destroy', $leaveRequest) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this leave request?')">Delete</button>
+                                            </form>
                                         @endif
-
-                                        <a href="{{ route('leave-requests.edit', $leaveRequest) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-
-                                        <form action="{{ route('leave-requests.destroy', $leaveRequest) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this leave request?')">Delete</button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
