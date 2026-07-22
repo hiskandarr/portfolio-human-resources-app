@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['role:HR,Developer,Sales']);
+    Route::get('/dashboard/chart-presence', [DashboardController::class, 'chartPresence']);
+
     // Handle tasks routes
     Route::resource('/tasks', TaskController::class)->middleware(['role:HR,Developer,Sales']);
     Route::get('/tasks/{task}/done', [TaskController::class, 'done'])->name('tasks.done')->middleware(['role:HR,Developer,Sales']);

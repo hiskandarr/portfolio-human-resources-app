@@ -200,6 +200,9 @@
     <script src="{{ asset('mazer/dist/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/static/js/pages/dashboard.js') }}"></script>
 
+    <!-- Need: ChartJs -->
+    <script src="{{ asset('mazer/dist/assets/extensions/chart.js/chart.umd.js') }}"></script>
+
     {{-- Dibutuhkan untuk handle datatables --}}
     <script src="{{ asset('mazer/dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/static/js/pages/simple-datatables.js') }}"></script>
@@ -216,6 +219,49 @@
             dateFormat: "Y-m-d H:i:s",
             enableTime: true
         });
+
+        var ctxBar = document.getElementById('chart-presence').getContext('2d');
+        var myBar = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Total',
+                    data: [],
+                    backgroundColor: 'rgba(63, 82, 227, 1)',
+                    borderColor: '#3F52E3',
+
+                }],
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Latest Presence'
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                }
+            }
+        });
+
+        function updateDataChartPresence() {
+            fetch('/dashboard/chart-presence').then(response => response.json()).then((output) => {
+                myBar.data.datasets = [{
+                    label: 'Total',
+                    data: output,
+                    backgroundColor: 'rgba(63, 82, 227, 1)',
+                    borderColor: '#3F52E3',
+
+                }];
+
+                myBar.update();
+            });
+        }
+
+        updateDataChartPresence();
     </script>
 </body>
 
